@@ -1,41 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_grid.c                                          :+:      :+:    :+:   */
+/*   ft_malloc_grid.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jibanez- <jibanez-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/11/10 15:07:12 by jibanez-          #+#    #+#             */
-/*   Updated: 2020/11/11 19:03:13 by jibanez-         ###   ########.fr       */
+/*   Created: 2020/11/11 11:49:50 by jibanez-          #+#    #+#             */
+/*   Updated: 2020/11/11 19:03:18 by jibanez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_head.h"
 
-void	ft_grid(char **grid, t_map_info map)
+void	ft_malloc_grid(char **grid, int y, int x)
 {
 	int i;
-	int j;
-	int k;
 
 	i = 0;
-	j = 0;
-	k = 0;
-	ft_malloc_grid(grid, map.y, map.x);
-	while (map.content[k] != '\n')
-		k++;
-	k++;
-	while (map.content[k] != '\0')
+	while (i <= y)
 	{
-		if (map.content[k] == '\n')
-		{
-			i++;
-			k++;
-			grid[i][j] = '\0';
-			j = 0;
-		}
-		grid[i][j] = map.content[k];
-		j++;
-		k++;
+		grid[i] = malloc(x * sizeof(grid) + 1);
+		i++;
 	}
 }

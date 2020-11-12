@@ -1,41 +1,22 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_grid.c                                          :+:      :+:    :+:   */
+/*   ft_binary.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jibanez- <jibanez-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/11/10 15:07:12 by jibanez-          #+#    #+#             */
-/*   Updated: 2020/11/11 19:03:13 by jibanez-         ###   ########.fr       */
+/*   Created: 2020/11/11 11:45:21 by jibanez-          #+#    #+#             */
+/*   Updated: 2020/11/11 19:03:10 by jibanez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_head.h"
+#include <stdio.h>
 
-void	ft_grid(char **grid, t_map_info map)
+void	ft_binary(char **grid, int **temp_grid, t_map_info map)
 {
-	int i;
-	int j;
-	int k;
-
-	i = 0;
-	j = 0;
-	k = 0;
-	ft_malloc_grid(grid, map.y, map.x);
-	while (map.content[k] != '\n')
-		k++;
-	k++;
-	while (map.content[k] != '\0')
-	{
-		if (map.content[k] == '\n')
-		{
-			i++;
-			k++;
-			grid[i][j] = '\0';
-			j = 0;
-		}
-		grid[i][j] = map.content[k];
-		j++;
-		k++;
-	}
+	*temp_grid = malloc(map.y * map.x * sizeof(*temp_grid) + 1);
+	ft_malloc_grid_int(temp_grid, map.y, map.x);
+	ft_init_row_n_col(temp_grid, map);
+	ft_update_obst(grid, temp_grid, map);
 }

@@ -1,41 +1,35 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_grid.c                                          :+:      :+:    :+:   */
+/*   ft_read_arg.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jibanez- <jibanez-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/11/10 15:07:12 by jibanez-          #+#    #+#             */
-/*   Updated: 2020/11/11 19:03:13 by jibanez-         ###   ########.fr       */
+/*   Created: 2020/11/11 21:48:37 by jibanez-          #+#    #+#             */
+/*   Updated: 2020/11/11 22:57:52 by jibanez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_head.h"
 
-void	ft_grid(char **grid, t_map_info map)
+void	ft_read_arg(char *filename)
 {
-	int i;
-	int j;
-	int k;
+	char	c;
+	int		check;
+	int		fd;
 
-	i = 0;
-	j = 0;
-	k = 0;
-	ft_malloc_grid(grid, map.y, map.x);
-	while (map.content[k] != '\n')
-		k++;
-	k++;
-	while (map.content[k] != '\0')
+	check = 2;
+	fd = open(filename, O_CREAT | O_TRUNC | O_WRONLY, 0644);
+	while (read(1, &c, 1) != -1)
 	{
-		if (map.content[k] == '\n')
-		{
-			i++;
-			k++;
-			grid[i][j] = '\0';
-			j = 0;
-		}
-		grid[i][j] = map.content[k];
-		j++;
-		k++;
+		if (c == 10)
+			check--;
+		else if (c != 10)
+			check = 2;
+		if (check != 0)
+			write(fd, &c, 1);
+		if (check == 0)
+			break ;
 	}
+	close(fd);
 }

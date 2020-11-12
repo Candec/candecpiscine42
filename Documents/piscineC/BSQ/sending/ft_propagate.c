@@ -1,41 +1,45 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_grid.c                                          :+:      :+:    :+:   */
+/*   ft_propagate.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jibanez- <jibanez-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/11/10 15:07:12 by jibanez-          #+#    #+#             */
-/*   Updated: 2020/11/11 19:03:13 by jibanez-         ###   ########.fr       */
+/*   Created: 2020/11/11 17:39:03 by jibanez-          #+#    #+#             */
+/*   Updated: 2020/11/11 23:00:27 by jibanez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_head.h"
 
-void	ft_grid(char **grid, t_map_info map)
+int		ft_min(int a, int b, int c)
+{
+	int m;
+
+	m = a;
+	if (m > b)
+		m = b;
+	if (m > c)
+		m = c;
+	return (m);
+}
+
+void	ft_propagate(char **grid, int **a, t_map_info map)
 {
 	int i;
 	int j;
-	int k;
 
-	i = 0;
-	j = 0;
-	k = 0;
-	ft_malloc_grid(grid, map.y, map.x);
-	while (map.content[k] != '\n')
-		k++;
-	k++;
-	while (map.content[k] != '\0')
+	i = 1;
+	j = 1;
+	while (i < map.y)
 	{
-		if (map.content[k] == '\n')
+		j = 1;
+		while (j < map.x)
 		{
-			i++;
-			k++;
-			grid[i][j] = '\0';
-			j = 0;
+			a[i][j] = 1 + ft_min(a[i - 1][j - 1], a[i - 1][j], a[i][j - 1]);
+			ft_update_obst(grid, a, map);
+			j++;
 		}
-		grid[i][j] = map.content[k];
-		j++;
-		k++;
+		i++;
 	}
 }

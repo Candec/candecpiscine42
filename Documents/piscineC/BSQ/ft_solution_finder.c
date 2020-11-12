@@ -1,41 +1,42 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_grid.c                                          :+:      :+:    :+:   */
+/*   ft_solution_finder.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jibanez- <jibanez-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/11/10 15:07:12 by jibanez-          #+#    #+#             */
-/*   Updated: 2020/11/11 19:03:13 by jibanez-         ###   ########.fr       */
+/*   Created: 2020/11/11 19:17:33 by jibanez-          #+#    #+#             */
+/*   Updated: 2020/11/11 22:57:09 by jibanez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_head.h"
 
-void	ft_grid(char **grid, t_map_info map)
+t_solution	ft_find_solution(int **grid, t_map_info map)
 {
-	int i;
-	int j;
-	int k;
+	int			i;
+	int			j;
+	t_solution	sol;
 
 	i = 0;
 	j = 0;
-	k = 0;
-	ft_malloc_grid(grid, map.y, map.x);
-	while (map.content[k] != '\n')
-		k++;
-	k++;
-	while (map.content[k] != '\0')
+	sol.y = 0;
+	sol.x = 0;
+	sol.size = 0;
+	while (i < map.y)
 	{
-		if (map.content[k] == '\n')
+		j = 0;
+		while (j < map.x)
 		{
-			i++;
-			k++;
-			grid[i][j] = '\0';
-			j = 0;
+			if (grid[i][j] > sol.size)
+			{
+				sol.size = grid[i][j];
+				sol.y = i;
+				sol.x = j;
+			}
+			j++;
 		}
-		grid[i][j] = map.content[k];
-		j++;
-		k++;
+		i++;
 	}
+	return (sol);
 }

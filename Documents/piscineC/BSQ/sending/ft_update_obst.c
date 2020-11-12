@@ -1,41 +1,32 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_grid.c                                          :+:      :+:    :+:   */
+/*   ft_update_obst.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jibanez- <jibanez-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/11/10 15:07:12 by jibanez-          #+#    #+#             */
-/*   Updated: 2020/11/11 19:03:13 by jibanez-         ###   ########.fr       */
+/*   Created: 2020/11/11 16:38:44 by jibanez-          #+#    #+#             */
+/*   Updated: 2020/11/11 19:03:23 by jibanez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_head.h"
 
-void	ft_grid(char **grid, t_map_info map)
+void	ft_update_obst(char **grid, int **temp_grid, t_map_info map)
 {
 	int i;
 	int j;
-	int k;
 
 	i = 0;
-	j = 0;
-	k = 0;
-	ft_malloc_grid(grid, map.y, map.x);
-	while (map.content[k] != '\n')
-		k++;
-	k++;
-	while (map.content[k] != '\0')
+	while (i < map.y)
 	{
-		if (map.content[k] == '\n')
+		j = 0;
+		while (j < map.x)
 		{
-			i++;
-			k++;
-			grid[i][j] = '\0';
-			j = 0;
+			if (grid[i][j] == map.obstacle)
+				temp_grid[i][j] = 0;
+			j++;
 		}
-		grid[i][j] = map.content[k];
-		j++;
-		k++;
+		i++;
 	}
 }
