@@ -1,0 +1,5 @@
+Credentials cache: API:761F2C8A-D8B9-4488-B624-39B61D2BE7B7
+        Principal: jibanez-@42LISBOA.COM
+
+  Issued                Expires               Principal
+Oct 19 15:51:02 2020  Oct 20 01:51:02 2020  krbtgt/42LISBOA.COM@42LISBOA.COM
