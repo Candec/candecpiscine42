@@ -1,0 +1,7 @@
+{
+	"git.ignoreLimitWarning": true,
+	"files.associations": {
+		"ft_printf.h": "c",
+		"libft.h": "c"
+	}
+}
